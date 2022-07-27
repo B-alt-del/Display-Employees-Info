@@ -1,0 +1,22 @@
+
+
+header{
+    display: flex;
+    background-color: dimgray;
+    justify-content: center;
+    margin-bottom: 3%;
+}
+
+h1{
+    padding: 1.5%;
+    color: aliceblue;
+}
+
+#employee_cards {
+    justify-content: center;
+}
+
+.card-header{
+    width: 100%;
+    background-color: aquamarine;
+}
