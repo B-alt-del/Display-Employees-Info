@@ -1,10 +1,14 @@
 const inquirer = require('inquirer');
-const Employees = require('./lib/employee.js');
 const Engineers = require('./lib/engineer.js');
 const Interns = require('./lib/intern');
+const generate_HTML = require('./src/src.js');
 const Managers = require('./lib/manager');
+const fs = require('fs');
 const team = [];
 
+const start = () => {
+    add_Manager();
+}
 
 const questions = (type) => {
     const questions = 
@@ -43,14 +47,13 @@ const questions = (type) => {
                 when: type === 'Intern'
             },
         ]
-
     return questions;
-
 }
+
 const add_next = [
     {
         type: "list",
-        message: "Add another Employee from choices:",
+        message: "\n\nAdd another Employee from choices:",
         name: "next",
         choices: ["Manager", "Engineer", "Intern", "Continue w/o adding"]
     }
@@ -71,7 +74,14 @@ function add_another() {
                     break;
 
                 default:
-                    console.log(team); //send team to src or pull in source 
+                    fs.writeFile('./dist/generated.html', generate_HTML(team), (error) => {
+                        if (error){
+                            console.log(error)
+                        }//else{
+                           // blah.readFile('test.txt', 'utf8', (error,data) => error ? console.error(error) : console.log(data)); //reading the file 
+                       // }
+                    });
+                    // cardsEl.innerHTML = generate_HTML(team); //send team to src or pull in source 
             }
         }))
 }
@@ -98,3 +108,4 @@ function add_Intern() {
     })
 }
 
+start();
